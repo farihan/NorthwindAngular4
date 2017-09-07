@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NorthwindAngular4.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindAngular4
 {
@@ -22,6 +24,8 @@ namespace NorthwindAngular4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DatabaseConnection"]));
+
             services.AddMvc();
         }
 
