@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NorthwindAngular4.Data;
 using Microsoft.EntityFrameworkCore;
+using NorthwindAngular4.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,18 +25,32 @@ namespace NorthwindAngular4.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var products = await context.Products.ToListAsync();
+            var productModels = await context.Products.Select(x => new ProductModel
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    SupplierId = x.SupplierId,
+                    CategoryId = x.CategoryId,
+                    QuantityPerUnit = x.QuantityPerUnit,
+                    UnitPrice = x.UnitPrice,
+                    UnitsInStock = x.UnitsInStock,
+                    UnitsOnOrder = x.UnitsOnOrder,
+                    ReorderLevel = x.ReorderLevel,
+                    Discontinued = x.Discontinued
+                })
+                .ToListAsync();
 
-            return Ok(products);
+            return Ok(productModels);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var product = await context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+            var productModel = await context.Products
+            .FirstOrDefaultAsync(x => x.ProductId == id);
 
-            return Ok(product);
+            return Ok(productModel);
         }
 
         // POST api/values
