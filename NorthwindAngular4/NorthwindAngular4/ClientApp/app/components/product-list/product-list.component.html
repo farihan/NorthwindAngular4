@@ -44,7 +44,7 @@
             <td>{{ product.unitsInStock }}</td>
             <td>{{ product.unitsOnOrder }}</td>
             <td>{{ product.reorderLevel }}</td>
-            <td><input type="checkbox" value="" [(ngModel)]="product.discontinued"></td>
+            <td><input type="checkbox" [ngModel]="product.discontinued" onclick="return false;" /></td>
         </tr>
     </tbody>
 </table>
