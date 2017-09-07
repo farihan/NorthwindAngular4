@@ -9,6 +9,9 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+
+import { ProductService } from './services/product.service';
 
 @NgModule({
     declarations: [
@@ -16,7 +19,8 @@ import { CounterComponent } from './components/counter/counter.component';
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        ProductListComponent
     ],
     imports: [
         CommonModule,
@@ -27,8 +31,12 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'product-list', component: ProductListComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        ProductService
     ]
 })
 export class AppModuleShared {

@@ -1,0 +1,32 @@
+﻿<h1>Product(s)</h1>
+
+<p>This component demonstrates fetching products from the server.</p>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table' *ngIf="products">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>In Stock</th>
+            <th>Order</th>
+            <th>Reorder Level</th>
+            <th>Discontinued</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{ product.productId }}</td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.quantityPerUnit }}</td>
+            <td>{{ product.unitPrice }}</td>
+            <td>{{ product.unitsInStock }}</td>
+            <td>{{ product.unitsOnOrder }}</td>
+            <td>{{ product.reorderLevel }}</td>
+            <td><input type="checkbox" value="" [(ngModel)]="product.discontinued"></td>
+        </tr>
+    </tbody>
+</table>
