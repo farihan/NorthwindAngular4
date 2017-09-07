@@ -12,8 +12,24 @@ export class ProductService {
             .map(res => res.json());
     }
 
-    getProducts() {
-        return this.http.get(this.endpoint)
+    //getProducts() {
+    //    return this.http.get(this.endpoint)
+    //        .map(res => res.json());
+    //}
+
+    getProducts(filter: any) {
+        return this.http.get(this.endpoint + '?' + this.toQueryString(filter))
             .map(res => res.json());
+    }
+
+    toQueryString(obj: any) {
+        var parts = [];
+        for (var property in obj) {
+            var value = obj[property];
+            if (value != null && value != undefined)
+                parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+        }
+
+        return parts.join('&');
     }
 }

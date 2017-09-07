@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using NorthwindAngular4.Data;
 using Microsoft.EntityFrameworkCore;
 using NorthwindAngular4.Models;
+using System.Linq.Expressions;
+using NorthwindAngular4.Extensions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,9 +25,21 @@ namespace NorthwindAngular4.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string sortBy, bool isSortAscending)
         {
-            var productModels = await context.Products.Select(x => new ProductModel
+            var columnsMap = new Dictionary<string, Expression<Func<Products, object>>>()
+            {
+                ["productid"] = column => column.ProductId,
+                ["productname"] = column => column.ProductName,
+                ["quantityperunit"] = column => column.QuantityPerUnit,
+                ["unitprice"] = column => column.UnitPrice,
+                ["unitsinstock"] = column => column.UnitsInStock,
+                ["unitsonorder"] = column => column.UnitsOnOrder,
+                ["reorderlevel"] = column => column.ReorderLevel,
+                ["discontinued"] = column => column.Discontinued,
+            };
+
+            var productModels = await context.Products.ApplyOrder<Products>(sortBy, columnsMap, isSortAscending).Select(x => new ProductModel
                 {
                     ProductId = x.ProductId,
                     ProductName = x.ProductName,
