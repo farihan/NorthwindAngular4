@@ -25,7 +25,7 @@ namespace NorthwindAngular4.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IActionResult> Get(string sortBy, bool isSortAscending)
+        public async Task<IActionResult> Get(string sortBy, bool isSortAscending, int page, int pageSize)
         {
             var columnsMap = new Dictionary<string, Expression<Func<Products, object>>>()
             {
@@ -39,22 +39,30 @@ namespace NorthwindAngular4.Controllers
                 ["discontinued"] = column => column.Discontinued,
             };
 
-            var productModels = await context.Products.ApplyOrder<Products>(sortBy, columnsMap, isSortAscending).Select(x => new ProductModel
-                {
-                    ProductId = x.ProductId,
-                    ProductName = x.ProductName,
-                    SupplierId = x.SupplierId,
-                    CategoryId = x.CategoryId,
-                    QuantityPerUnit = x.QuantityPerUnit,
-                    UnitPrice = x.UnitPrice,
-                    UnitsInStock = x.UnitsInStock,
-                    UnitsOnOrder = x.UnitsOnOrder,
-                    ReorderLevel = x.ReorderLevel,
-                    Discontinued = x.Discontinued
-                })
-                .ToListAsync();
+            var resultModel = new ResultModel<ProductModel>();
+            var list = context.Products.AsQueryable();
 
-            return Ok(productModels);
+            list = list.ApplyOrder(sortBy, columnsMap, isSortAscending);
+
+            resultModel.TotalRecords = await list.CountAsync();
+
+            list = list.ApplyPage(page, pageSize);
+
+            resultModel.Records = await list.Select(x => new ProductModel
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                SupplierId = x.SupplierId,
+                CategoryId = x.CategoryId,
+                QuantityPerUnit = x.QuantityPerUnit,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                UnitsOnOrder = x.UnitsOnOrder,
+                ReorderLevel = x.ReorderLevel,
+                Discontinued = x.Discontinued
+            }).ToListAsync();
+
+            return Ok(resultModel);
         }
 
         // GET api/values/5

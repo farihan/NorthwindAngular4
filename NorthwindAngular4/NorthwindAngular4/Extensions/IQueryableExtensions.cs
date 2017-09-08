@@ -18,5 +18,16 @@ namespace NorthwindAngular4.Extensions
             else
                 return query.OrderByDescending(columnsMap[sortBy]);
         }
+
+        public static IQueryable<T> ApplyPage<T>(this IQueryable<T> query, int page, int pageSize)
+        {
+            if (page <= 0)
+                page = 1;
+
+            if (pageSize <= 0)
+                pageSize = 10;
+
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
     }
 }

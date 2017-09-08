@@ -11,8 +11,12 @@ import { ProductService } from './../../services/product.service';
 })
 
 export class ProductListComponent implements OnInit {
-    public products: Product[];
-    public query: any = {};
+    private readonly PAGE_SIZE = 10; 
+
+    public queryResult: any = {};
+    public query: any = {
+        pageSize: this.PAGE_SIZE
+    };
     public columns = [
         { title: 'ID', key: 'productid', isSortable: true },
         { title: 'Name', key: 'productname', isSortable: true },
@@ -33,7 +37,7 @@ export class ProductListComponent implements OnInit {
     private populateProducts() {
         this.productService.getProducts(this.query)
             .subscribe(result => {
-                this.products = result;
+                this.queryResult = result;
             }, error => console.error(error));
     }
 
@@ -45,6 +49,11 @@ export class ProductListComponent implements OnInit {
             this.query.isSortAscending = true;
         }
 
+        this.populateProducts();
+    }
+
+    onPageChange(page: number) {
+        this.query.page = page;
         this.populateProducts();
     }
 }

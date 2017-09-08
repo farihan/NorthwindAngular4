@@ -2,9 +2,9 @@
 
 <p>This component demonstrates fetching products from the server.</p>
 
-<p *ngIf="!products"><em>Loading...</em></p>
+<p *ngIf="!queryResult"><em>Loading...</em></p>
 
-<table class='table' *ngIf="products">
+<table class='table'>
     <thead>
         <tr>
             <!--<th>ID</th>
@@ -36,15 +36,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{ product.productId }}</td>
-            <td>{{ product.productName }}</td>
-            <td>{{ product.quantityPerUnit }}</td>
-            <td>{{ product.unitPrice }}</td>
-            <td>{{ product.unitsInStock }}</td>
-            <td>{{ product.unitsOnOrder }}</td>
-            <td>{{ product.reorderLevel }}</td>
-            <td><input type="checkbox" [ngModel]="product.discontinued" onclick="return false;" /></td>
+        <tr *ngFor="let record of queryResult.records">
+            <td>{{ record.productId }}</td>
+            <td>{{ record.productName }}</td>
+            <td>{{ record.quantityPerUnit }}</td>
+            <td>{{ record.unitPrice }}</td>
+            <td>{{ record.unitsInStock }}</td>
+            <td>{{ record.unitsOnOrder }}</td>
+            <td>{{ record.reorderLevel }}</td>
+            <td><input type="checkbox" [ngModel]="record.discontinued" onclick="return false;" /></td>
         </tr>
     </tbody>
 </table>
+<pagination [total-records]="queryResult.totalRecords" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>

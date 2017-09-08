@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { PaginationComponent } from './components/shared/pagination.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 
 import { ProductService } from './services/product.service';
@@ -20,6 +21,7 @@ import { ProductService } from './services/product.service';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
+        PaginationComponent,
         ProductListComponent
     ],
     imports: [
