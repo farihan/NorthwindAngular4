@@ -7,8 +7,8 @@ export class ProductService {
     private readonly endpoint = '/api/product';
     constructor(private http: Http) { }
 
-    getProduct() {
-        return this.http.get(this.endpoint)
+    getProduct(id: number) {
+        return this.http.get(this.endpoint + '/' + id)
             .map(res => res.json());
     }
 

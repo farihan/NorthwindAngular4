@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Product } from './../../models/product';
 import { ProductService } from './../../services/product.service';
@@ -25,10 +26,11 @@ export class ProductListComponent implements OnInit {
         { title: 'In Stock', key: 'unitsinstock', isSortable: true },
         { title: 'Order', key: 'unitsonorder', isSortable: true },
         { title: 'Reorder Level', key: 'reorderlevel', isSortable: true },
-        { title: 'Discontinued', key: 'discontinued', isSortable: true }
+        { title: 'Discontinued', key: 'discontinued', isSortable: true },
+        { title: '', key: '', isSortable: false }
     ]
 
-    constructor(private productService: ProductService) { }
+    constructor(private productService: ProductService, private router: Router) { }
 
     ngOnInit() {
         this.populateProducts();

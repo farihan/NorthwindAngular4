@@ -1,0 +1,83 @@
+﻿<h1>Product Details</h1>
+
+<p>This component demonstrates fetching product details from the server.</p>
+
+<div class="modal-body" *ngIf="product">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Product Name
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="productName" name="productName" [(ngModel)]="product.productName" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Quantity Per Unit
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="quantityPerUnit" name="quantityPerUnit" [(ngModel)]="product.quantityPerUnit" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Unit Price
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Units In Stock
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="unitsInStock" name="unitsInStock" [(ngModel)]="product.unitsInStock" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Units On Order
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="unitsOnOrder" name="unitsOnOrder" [(ngModel)]="product.unitsOnOrder" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Reorder Level
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="reorderLevel" name="reorderLevel" [(ngModel)]="product.reorderLevel" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Discontinued
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="discontinued" name="discontinued" [(ngModel)]="product.discontinued" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Supplier
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="supplierId" name="supplierId" [(ngModel)]="product.supplierId" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Category
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="categoryId" name="categoryId" [(ngModel)]="product.categoryId" placeholder="" class="form-control input-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a [routerLink]="['/product-list']" class="btn btn-default btn-sm pull-left" role="button">Cancel</a>
+</div>

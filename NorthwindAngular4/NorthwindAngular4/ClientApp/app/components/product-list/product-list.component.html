@@ -34,7 +34,9 @@
             <td>{{ record.unitsOnOrder }}</td>
             <td>{{ record.reorderLevel }}</td>
             <td><input type="checkbox" [ngModel]="record.discontinued" onclick="return false;" /></td>
+            <td><a [routerLink]="['/product-details/', record.productId]" class="btn btn-default btn-sm" role="button">Details</a>&nbsp;<button class="btn btn-default btn-sm">Edit</button>&nbsp;<button class="btn btn-default btn-sm">Delete</button></td>
         </tr>
     </tbody>
 </table>
+
 <pagination [total-records]="queryResult.totalRecords" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>

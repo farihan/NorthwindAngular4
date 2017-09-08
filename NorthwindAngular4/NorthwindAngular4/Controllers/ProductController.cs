@@ -81,8 +81,22 @@ namespace NorthwindAngular4.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var productModel = await context.Products
-            .FirstOrDefaultAsync(x => x.ProductId == id);
+            var productModel = await context.Products.Select(x => new ProductModel
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                SupplierId = x.SupplierId,
+                CategoryId = x.CategoryId,
+                QuantityPerUnit = x.QuantityPerUnit,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                UnitsOnOrder = x.UnitsOnOrder,
+                ReorderLevel = x.ReorderLevel,
+                Discontinued = x.Discontinued
+            }).FirstOrDefaultAsync(x => x.ProductId == id);
+
+            if (productModel == null)
+                return NotFound();
 
             return Ok(productModel);
         }
