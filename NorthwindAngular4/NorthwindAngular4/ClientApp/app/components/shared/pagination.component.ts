@@ -11,16 +11,16 @@ import { OnChanges } from '@angular/core';
     <nav *ngIf="totalRecords > pageSize">
         <ul class="pagination">
             <li [class.disabled]="currentPage == 1">
-                <a [routerLink]="['/product-list']" (click)="previous()" aria-label="Previous">
-                <span aria-hidden="true">Previous</span>
+                <a [routerLink]="['/product-list']" (click)="first()" aria-label="First">
+                <span aria-hidden="true">First</span>
                 </a>
             </li>
             <li [class.active]="currentPage == page" *ngFor="let page of pages" (click)="changePage(page)">
                 <a [routerLink]="['/product-list']">{{ page }}</a>
             </li>
             <li [class.disabled]="currentPage == pages.length">
-                <a [routerLink]="['/product-list']" (click)="next()" aria-label="Next">
-                <span aria-hidden="true">Next</span>
+                <a [routerLink]="['/product-list']" (click)="last()" aria-label="Last">
+                <span aria-hidden="true">Last</span>
                 </a>
             </li>
         </ul>
@@ -63,5 +63,15 @@ export class PaginationComponent implements OnChanges {
 		this.currentPage++;
         console.log("next", this);
 		this.pageChanged.emit(this.currentPage);
-	}
+    }
+
+    first() {
+        this.currentPage = 1;
+        this.pageChanged.emit(this.currentPage);
+    }
+
+    last() {
+        this.currentPage = this.pages.length;
+        this.pageChanged.emit(this.currentPage);
+    }
 }

@@ -25,7 +25,7 @@ namespace NorthwindAngular4.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IActionResult> Get(string sortBy, bool isSortAscending, int page, int pageSize)
+        public async Task<IActionResult> Get(string sortBy, bool isSortAscending, int page, int pageSize, string filter)
         {
             var columnsMap = new Dictionary<string, Expression<Func<Products, object>>>()
             {
@@ -42,8 +42,20 @@ namespace NorthwindAngular4.Controllers
             var resultModel = new ResultModel<ProductModel>();
             var list = context.Products.AsQueryable();
 
-            list = list.ApplyOrder(sortBy, columnsMap, isSortAscending);
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                list = list.ApplyFilter(x => x.ProductId.ToString().ToLower().Contains(filter.ToLower()) ||
+                    x.ProductName.ToLower().Contains(filter.ToLower()) ||
+                    x.QuantityPerUnit.ToLower().Contains(filter.ToLower()) ||
+                    x.UnitPrice.ToString().ToLower().Contains(filter.ToLower()) ||
+                    x.UnitsInStock.ToString().ToLower().Contains(filter.ToLower()) ||
+                    x.UnitsOnOrder.ToString().ToLower().Contains(filter.ToLower()) ||
+                    x.ReorderLevel.ToString().ToLower().Contains(filter.ToLower()) ||
+                    x.Discontinued.ToString().ToLower().Contains(filter.ToLower()));
+            }
 
+            list = list.ApplyOrder(sortBy, columnsMap, isSortAscending);
+            
             resultModel.TotalRecords = await list.CountAsync();
 
             list = list.ApplyPage(page, pageSize);

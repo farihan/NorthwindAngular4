@@ -56,4 +56,9 @@ export class ProductListComponent implements OnInit {
         this.query.page = page;
         this.populateProducts();
     }
+
+    onFilterChange() {
+        this.query.page = 1;
+        this.populateProducts();
+    }
 }

@@ -4,17 +4,13 @@
 
 <p *ngIf="!queryResult"><em>Loading...</em></p>
 
+<div class="well">
+    <input id="filter" type="text" [(ngModel)]="query.filter" name="filter">&nbsp;<button class="btn btn-default btn-sm" (click)="onFilterChange()">Search</button>
+</div>
+
 <table class='table'>
     <thead>
         <tr>
-            <!--<th>ID</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>In Stock</th>
-            <th>Order</th>
-            <th>Reorder Level</th>
-            <th>Discontinued</th>-->
             <th *ngFor="let column of columns">
                 <a [routerLink]="['/product-list']" *ngIf="column.isSortable" (click)="sortBy(column.key)">
                     {{ column.title }}
@@ -22,13 +18,6 @@
                        class="fa"
                        [class.fa-sort-asc]="query.isSortAscending"
                        [class.fa-sort-desc]="!query.isSortAscending"></i>
-                <!--<div *ngIf="column.isSortable" (click)="sortBy(column.key)">
-                    {{ column.title }}
-                    <i *ngIf="query.sortBy === column.key"
-                       class="fa"
-                       [class.fa-sort-asc]="query.isSortAscending"
-                       [class.fa-sort-desc]="!query.isSortAscending"></i>
-                </div>-->
                 <div *ngIf="!column.isSortable">
                     {{ column.title }}
                 </div>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NorthwindAngular4.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -28,6 +29,11 @@ namespace NorthwindAngular4.Extensions
                 pageSize = 10;
 
             return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query, Expression<Func<T, bool>> where)
+        {
+            return query.Where(where);
         }
     }
 }
