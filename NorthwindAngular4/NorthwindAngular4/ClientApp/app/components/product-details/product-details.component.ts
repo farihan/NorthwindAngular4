@@ -1,7 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/Observable/forkJoin';
 
 import { ProductService } from './../../services/product.service';
+import { CategoryService } from './../../services/category.service';
+import { SupplierService } from './../../services/supplier.service';
 
 @Component({
     selector: 'productdetails',
@@ -9,10 +13,12 @@ import { ProductService } from './../../services/product.service';
 })
 
 export class ProductDetailsComponent implements OnInit {
+    suppliers: any[];
+    categories: any[];
     public productId: number;
     public product: any;
 
-    constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {
+    constructor(private productService: ProductService, private categoryService: CategoryService, private supplierService: SupplierService, private route: ActivatedRoute, private router: Router) {
         route.params.subscribe(p => {
             this.productId = +p['id'];
             if (isNaN(this.productId) || this.productId <= 0) {
@@ -23,6 +29,30 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        //this.supplierService.getSuppliers()
+        //    .subscribe(result => {
+        //        this.suppliers = result;
+        //    }, error => console.error(error));
+
+        //this.categoryService.getCategories()
+        //    .subscribe(result => {
+        //        this.categories = result;
+        //    }, error => console.error(error));
+
+        var sources = [
+            this.supplierService.getSuppliers(),
+            this.categoryService.getCategories(),
+        ];
+
+        Observable.forkJoin(sources).subscribe(data => {
+            this.suppliers = data[0];
+            this.categories = data[1];
+        }, err => {
+            if (err.status == 404)
+                this.router.navigate(['/home']);
+        });
+
         this.populateProduct();
     }
 
