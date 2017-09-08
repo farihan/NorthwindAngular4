@@ -14,6 +14,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 import { ProductService } from './services/product.service';
+import { CategoryService } from './services/category.service';
+import { SupplierService } from './services/supplier.service';
 
 @NgModule({
     declarations: [
@@ -41,7 +43,9 @@ import { ProductService } from './services/product.service';
         ])
     ],
     providers: [
-        ProductService
+        ProductService,
+        CategoryService,
+        SupplierService
     ]
 })
 export class AppModuleShared {
