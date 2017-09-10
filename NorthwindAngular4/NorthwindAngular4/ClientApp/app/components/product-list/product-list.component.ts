@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { NotificationService } from './../../services/notification.service';
 import { Product } from './../../models/product';
@@ -31,7 +30,7 @@ export class ProductListComponent implements OnInit {
         { title: '', key: '', isSortable: false }
     ]
 
-    constructor(private notificationService: NotificationService, private productService: ProductService, private router: Router) { }
+    constructor(private notificationService: NotificationService, private productService: ProductService) { }
 
     ngOnInit() {
         this.populateProducts();
@@ -41,7 +40,7 @@ export class ProductListComponent implements OnInit {
         this.productService.getProducts(this.query)
             .subscribe(result => {
                 this.queryResult = result;
-                this.notificationService.success('Products list loaded');
+                this.notificationService.info('Products list loaded');
             }, error => {
                 console.error(error);
                 this.notificationService.error(error);

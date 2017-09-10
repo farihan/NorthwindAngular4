@@ -8,6 +8,10 @@
     <input id="filter" type="text" [(ngModel)]="query.filter" name="filter">&nbsp;<button class="btn btn-default btn-sm" (click)="onFilterChange()">Search</button>
 </div>
 
+<div class="span12 pull-right">
+    <a [routerLink]="['/product-create']" class="btn btn-default btn-sm">Create Product</a>
+</div>
+
 <table class='table'>
     <thead>
         <tr>

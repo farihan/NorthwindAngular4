@@ -2,6 +2,8 @@
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { Product } from './../models/product';
+
 @Injectable()
 export class ProductService {
     private readonly endpoint = '/api/product';
@@ -12,14 +14,14 @@ export class ProductService {
             .map(res => res.json());
     }
 
-    //getProducts() {
-    //    return this.http.get(this.endpoint)
-    //        .map(res => res.json());
-    //}
-
     getProducts(filter: any) {
         return this.http.get(this.endpoint + '?' + this.toQueryString(filter))
             .map(res => res.json());
+    }
+
+    create(product: Product)
+    {
+        return this.http.post(this.endpoint, product);
     }
 
     toQueryString(obj: any) {

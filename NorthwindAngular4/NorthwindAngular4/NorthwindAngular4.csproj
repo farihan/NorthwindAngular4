@@ -23,19 +23,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\product-create\product-create.component.ts" />
     <None Remove="ClientApp\app\components\product-details\product-details.component.ts" />
     <None Remove="ClientApp\app\components\product-list\product-list.component.ts" />
     <None Remove="ClientApp\app\models\product.ts" />
     <None Remove="ClientApp\app\services\category.service.ts" />
+    <None Remove="ClientApp\app\services\notification.service.ts" />
     <None Remove="ClientApp\app\services\product.service.ts" />
     <None Remove="ClientApp\app\services\supplier.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\product-create\product-create.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\product-details\product-details.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\product-list\product-list.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\product.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\category.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\notification.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\product.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\supplier.service.ts" />
   </ItemGroup>

@@ -103,8 +103,27 @@ namespace NorthwindAngular4.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]ProductModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var product = new Products();
+            product.ProductName = model.ProductName;
+            product.QuantityPerUnit = model.QuantityPerUnit;
+            product.UnitPrice = model.UnitPrice;
+            product.UnitsInStock = model.UnitsInStock;
+            product.UnitsOnOrder = model.UnitsOnOrder;
+            product.ReorderLevel = model.ReorderLevel;
+            product.Discontinued = model.Discontinued;
+            product.SupplierId = model.SupplierId;
+            product.CategoryId = model.CategoryId;
+
+            context.Products.Add(product);
+
+            var result = await context.SaveChangesAsync();
+
+            return Ok();
         }
 
         // PUT api/values/5

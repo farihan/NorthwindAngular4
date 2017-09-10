@@ -31,16 +31,6 @@ export class ProductDetailsComponent implements OnInit {
 
     ngOnInit() {
 
-        //this.supplierService.getSuppliers()
-        //    .subscribe(result => {
-        //        this.suppliers = result;
-        //    }, error => console.error(error));
-
-        //this.categoryService.getCategories()
-        //    .subscribe(result => {
-        //        this.categories = result;
-        //    }, error => console.error(error));
-
         var sources = [
             this.supplierService.getSuppliers(),
             this.categoryService.getCategories(),
@@ -49,9 +39,10 @@ export class ProductDetailsComponent implements OnInit {
         Observable.forkJoin(sources).subscribe(data => {
             this.suppliers = data[0];
             this.categories = data[1];
-        }, err => {
-            if (err.status == 404)
-                this.router.navigate(['/home']);
+        }, error => {
+            this.notificationService.error(error);
+            //if (error.status == 404)
+            //    this.router.navigate(['/home']);
         });
 
         this.populateProduct();
@@ -61,7 +52,7 @@ export class ProductDetailsComponent implements OnInit {
         this.productService.getProduct(this.productId)
             .subscribe(result => {
                 this.product = result;
-                this.notificationService.success('Product details loaded');
+                this.notificationService.info('Product details loaded');
             },
             error => {
                 this.notificationService.error(error);

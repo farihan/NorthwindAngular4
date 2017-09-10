@@ -13,6 +13,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
 
 import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';
@@ -28,7 +29,8 @@ import { SupplierService } from './services/supplier.service';
         HomeComponent,
         PaginationComponent,
         ProductListComponent,
-        ProductDetailsComponent
+        ProductDetailsComponent,
+        ProductCreateComponent
     ],
     imports: [
         CommonModule,
@@ -41,6 +43,7 @@ import { SupplierService } from './services/supplier.service';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'product-list', component: ProductListComponent },
+            { path: 'product-create', component: ProductCreateComponent },
             { path: 'product-details/:id', component: ProductDetailsComponent },
             { path: '**', redirectTo: 'home' }
         ])
