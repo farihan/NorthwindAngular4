@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { ToastyModule } from "ng2-toasty";
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -13,6 +14,7 @@ import { PaginationComponent } from './components/shared/pagination.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
+import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
 import { SupplierService } from './services/supplier.service';
@@ -32,6 +34,7 @@ import { SupplierService } from './services/supplier.service';
         CommonModule,
         HttpModule,
         FormsModule,
+        ToastyModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -43,6 +46,7 @@ import { SupplierService } from './services/supplier.service';
         ])
     ],
     providers: [
+        NotificationService,
         ProductService,
         CategoryService,
         SupplierService

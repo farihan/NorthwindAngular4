@@ -2,6 +2,7 @@
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { NotificationService } from './../../services/notification.service';
 import { Product } from './../../models/product';
 import { ProductService } from './../../services/product.service';
 
@@ -30,7 +31,7 @@ export class ProductListComponent implements OnInit {
         { title: '', key: '', isSortable: false }
     ]
 
-    constructor(private productService: ProductService, private router: Router) { }
+    constructor(private notificationService: NotificationService, private productService: ProductService, private router: Router) { }
 
     ngOnInit() {
         this.populateProducts();
@@ -40,7 +41,11 @@ export class ProductListComponent implements OnInit {
         this.productService.getProducts(this.query)
             .subscribe(result => {
                 this.queryResult = result;
-            }, error => console.error(error));
+                this.notificationService.success('Products list loaded');
+            }, error => {
+                console.error(error);
+                this.notificationService.error(error);
+            });
     }
 
     sortBy(columnName: any) {

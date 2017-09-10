@@ -67,7 +67,7 @@
             <div class="col-md-3">
                 <select id="supplierId" class="form-control" [(ngModel)]="product.supplierId" name="supplierId">
                     <option value="">Select...</option>
-                    <option *ngFor="let supplier of suppliers" value="{{ supplier.supplierID }}">{{ supplier.companyName }}</option>
+                    <option *ngFor="let supplier of suppliers" value="{{ supplier.supplierID }}">{{ supplier.contactName }}&nbsp;({{ supplier.companyName }})</option>
                 </select>
             </div>
         </div>

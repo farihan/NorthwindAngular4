@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/Observable/forkJoin';
 
+import { NotificationService } from './../../services/notification.service';
 import { ProductService } from './../../services/product.service';
 import { CategoryService } from './../../services/category.service';
 import { SupplierService } from './../../services/supplier.service';
@@ -18,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
     public productId: number;
     public product: any;
 
-    constructor(private productService: ProductService, private categoryService: CategoryService, private supplierService: SupplierService, private route: ActivatedRoute, private router: Router) {
+    constructor(private notificationService: NotificationService, private productService: ProductService, private categoryService: CategoryService, private supplierService: SupplierService, private route: ActivatedRoute, private router: Router) {
         route.params.subscribe(p => {
             this.productId = +p['id'];
             if (isNaN(this.productId) || this.productId <= 0) {
@@ -58,12 +59,12 @@ export class ProductDetailsComponent implements OnInit {
 
     private populateProduct() {
         this.productService.getProduct(this.productId)
-            .subscribe(result => this.product = result,
-            err => {
-                if (err.status == 404) {
-                    this.router.navigate(['/product-list']);
-                    return;
-                }
+            .subscribe(result => {
+                this.product = result;
+                this.notificationService.success('Product details loaded');
+            },
+            error => {
+                this.notificationService.error(error);
             });
     }
 }

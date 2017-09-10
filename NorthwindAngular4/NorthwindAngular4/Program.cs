@@ -22,7 +22,7 @@ namespace NorthwindAngular4
                 .UseStartup<Startup>()
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging:IncludeScopes"));
                     //logging.AddConsole();
                     logging.AddDebug();
                 })
