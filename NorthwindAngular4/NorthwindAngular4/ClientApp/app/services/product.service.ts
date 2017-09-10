@@ -25,6 +25,11 @@ export class ProductService {
             .map(res => res.json());
     }
 
+    update(product: Product) {
+        return this.http.put(this.endpoint + '/' + product.productId, product)
+            .map(res => res.json());
+    }
+
     toQueryString(obj: any) {
         var parts = [];
         for (var property in obj) {

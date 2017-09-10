@@ -14,6 +14,7 @@ import { PaginationComponent } from './components/shared/pagination.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';
@@ -30,7 +31,8 @@ import { SupplierService } from './services/supplier.service';
         PaginationComponent,
         ProductListComponent,
         ProductDetailsComponent,
-        ProductCreateComponent
+        ProductCreateComponent,
+        ProductUpdateComponent
     ],
     imports: [
         CommonModule,
@@ -45,6 +47,7 @@ import { SupplierService } from './services/supplier.service';
             { path: 'product-list', component: ProductListComponent },
             { path: 'product-create', component: ProductCreateComponent },
             { path: 'product-details/:id', component: ProductDetailsComponent },
+            { path: 'product-update/:id', component: ProductUpdateComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

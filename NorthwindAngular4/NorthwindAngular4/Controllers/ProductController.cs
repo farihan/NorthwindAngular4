@@ -142,8 +142,45 @@ namespace NorthwindAngular4.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(int id, [FromBody]ProductModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);            
+
+            var product = await context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+
+            if (product == null)
+                return NotFound();
+
+            product.ProductName = model.ProductName;
+            product.QuantityPerUnit = model.QuantityPerUnit;
+            product.UnitPrice = model.UnitPrice;
+            product.UnitsInStock = model.UnitsInStock;
+            product.UnitsOnOrder = model.UnitsOnOrder;
+            product.ReorderLevel = model.ReorderLevel;
+            product.Discontinued = model.Discontinued;
+            product.SupplierId = model.SupplierId;
+            product.CategoryId = model.CategoryId;
+
+            context.Products.Update(product);
+
+            var result = await context.SaveChangesAsync();
+
+            var productModel = await context.Products.Select(x => new ProductModel
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                SupplierId = x.SupplierId,
+                CategoryId = x.CategoryId,
+                QuantityPerUnit = x.QuantityPerUnit,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                UnitsOnOrder = x.UnitsOnOrder,
+                ReorderLevel = x.ReorderLevel,
+                Discontinued = x.Discontinued
+            }).FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
+
+            return Ok(productModel);
         }
 
         // DELETE api/values/5

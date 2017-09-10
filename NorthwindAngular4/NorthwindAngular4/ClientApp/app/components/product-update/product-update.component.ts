@@ -11,35 +11,27 @@ import { CategoryService } from './../../services/category.service';
 import { SupplierService } from './../../services/supplier.service';
 
 @Component({
-    selector: 'productcreate',
-    templateUrl: './product-create.component.html'
+    selector: 'productupdate',
+    templateUrl: './product-update.component.html'
 })
 
-export class ProductCreateComponent implements OnInit {
-
+export class ProductUpdateComponent implements OnInit {
+    suppliers: any[];
+    categories: any[];
+    public productId: number;
     public product: any;
-    public suppliers: any[];
-    public categories: any[];
 
-    constructor(private notificationService: NotificationService, private productService: ProductService, private categoryService: CategoryService, private supplierService: SupplierService, private router: Router) {
-        
+    constructor(private notificationService: NotificationService, private productService: ProductService, private categoryService: CategoryService, private supplierService: SupplierService, private route: ActivatedRoute, private router: Router) {
+        route.params.subscribe(p => {
+            this.productId = +p['id'];
+            if (isNaN(this.productId) || this.productId <= 0) {
+                router.navigate(['/product-list']);
+                return;
+            }
+        });
     }
 
     ngOnInit() {
-
-        this.product = { discontinued: false, supplierId: '', categoryId: ''};
-        //this.product = {
-        //    productId: 0,
-        //    productName: '',
-        //    quantityPerUnit: '',
-        //    unitPrice: 0,
-        //    unitsInStock: 0,
-        //    unitsOnOrder: 0,
-        //    reorderLevel: 0,
-        //    discontinued: false,
-        //    supplierId: '',
-        //    categoryId: ''
-        //};
 
         var sources = [
             this.supplierService.getSuppliers(),
@@ -51,16 +43,27 @@ export class ProductCreateComponent implements OnInit {
             this.categories = data[1];
         }, error => {
             this.notificationService.error(error);
+        });
+
+        this.populateProduct();
+    }
+
+    private populateProduct() {
+        this.productService.getProduct(this.productId)
+            .subscribe(result => {
+                this.product = result;
+                this.notificationService.info('Product update loaded');
+            },
+            error => {
+                this.notificationService.error(error);
             });
-        
-        this.notificationService.info('Product create loaded');
     }
 
     onSubmit(product: Product, isValid: boolean) {
         if (isValid) {
-            this.productService.create(this.product)
+            this.productService.update(this.product)
                 .subscribe(result => {
-                    this.notificationService.success('Product created');
+                    this.notificationService.success('Product udpated');
                     this.router.navigate(['/product-list']);
                 }, error => {
                     this.notificationService.error(error);

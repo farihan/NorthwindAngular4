@@ -42,7 +42,6 @@ export class ProductListComponent implements OnInit {
                 this.queryResult = result;
                 this.notificationService.info('Products list loaded');
             }, error => {
-                console.error(error);
                 this.notificationService.error(error);
             });
     }

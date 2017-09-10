@@ -1,0 +1,125 @@
+﻿<h1>Product Update</h1>
+
+<p>This component demonstrates updating product.</p>
+
+<form #updateProductForm="ngForm" (ngSubmit)="onSubmit(updateProductForm.value, updateProductForm.valid)" novalidate>
+    <div class="modal-body" *ngIf="product">
+        <div class="form-horizontal">
+            <div class="form-group" [ngClass]="{ 'has-error': !productName.valid && (productName.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Product Name
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="productName" name="productName" placeholder="" class="form-control input-sm" [(ngModel)]="product.productName" #productName="ngModel" required />
+                    <div *ngIf="!productName.valid && (productName.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Product Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !quantityPerUnit.valid && (quantityPerUnit.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Quantity Per Unit
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="quantityPerUnit" name="quantityPerUnit" placeholder="" class="form-control input-sm" [(ngModel)]="product.quantityPerUnit" #quantityPerUnit="ngModel" required />
+                    <div *ngIf="!quantityPerUnit.valid && (quantityPerUnit.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Quantity Per Unit is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !unitPrice.valid && (unitPrice.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Unit Price
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="unitPrice" name="unitPrice" placeholder="" class="form-control input-sm" [(ngModel)]="product.unitPrice" #unitPrice="ngModel" required />
+                    <div *ngIf="!unitPrice.valid && (unitPrice.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Unit Price is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !unitsInStock.valid && (unitsInStock.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Units In Stock
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="unitsInStock" name="unitsInStock" placeholder="" class="form-control input-sm" [(ngModel)]="product.unitsInStock" #unitsInStock="ngModel" required />
+                    <div *ngIf="!unitsInStock.valid && (unitsInStock.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Units In Stockis required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !unitsOnOrder.valid && (unitsOnOrder.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Units On Order
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="unitsOnOrder" name="unitsOnOrder" placeholder="" class="form-control input-sm" [(ngModel)]="product.unitsOnOrder" #unitsOnOrder="ngModel" required />
+                    <div *ngIf="!unitsOnOrder.valid && (unitsOnOrder.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Units On Order is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !reorderLevel.valid && (reorderLevel.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Reorder Level
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="reorderLevel" name="reorderLevel" placeholder="" class="form-control input-sm" [(ngModel)]="product.reorderLevel" #reorderLevel="ngModel" required />
+                    <div *ngIf="!reorderLevel.valid && (reorderLevel.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Reorder Level is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    Discontinued
+                </div>
+                <div class="col-md-3">
+                    <input type="checkbox" id="discontinued" name="discontinued" placeholder="" [(ngModel)]="product.discontinued" #discontinued="ngModel" style="margin-top:10px" />
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !supplierId.valid && (supplierId.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Supplier
+                </div>
+                <div class="col-md-3">
+                    <select id="supplierId" class="form-control" name="supplierId" [(ngModel)]="product.supplierId" #supplierId="ngModel" required>
+                        <option value="">Select...</option>
+                        <option *ngFor="let supplier of suppliers" value="{{ supplier.supplierID }}">{{ supplier.contactName }}&nbsp;({{ supplier.companyName }})</option>
+                    </select>
+                    <div *ngIf="!supplierId.valid && (supplierId.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Supplier is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': !categoryId.valid && (categoryId.dirty || updateProductForm.submitted)}">
+                <div class="col-md-2 control-label">
+                    Category
+                </div>
+                <div class="col-md-3">
+                    <select id="categoryId" class="form-control" name="categoryId" [(ngModel)]="product.categoryId" #categoryId="ngModel" required>
+                        <option value="">Select...</option>
+                        <option *ngFor="let category of categories" value="{{ category.categoryID }}">{{ category.categoryName }}</option>
+                    </select>
+                    <div *ngIf="!categoryId.valid && (categoryId.dirty || updateProductForm.submitted)"
+                         class="alert alert-danger">
+                        Supplier is required
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a [routerLink]="['/product-list']" class="btn btn-default btn-sm pull-left" role="button">Cancel</a>
+        <button type="submit" class="btn btn-success btn-sm pull-left">Update</button>
+    </div>
+</form>
