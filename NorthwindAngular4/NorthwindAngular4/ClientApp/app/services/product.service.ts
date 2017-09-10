@@ -21,7 +21,8 @@ export class ProductService {
 
     create(product: Product)
     {
-        return this.http.post(this.endpoint, product);
+        return this.http.post(this.endpoint, product)
+            .map(res => res.json());
     }
 
     toQueryString(obj: any) {

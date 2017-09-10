@@ -123,7 +123,21 @@ namespace NorthwindAngular4.Controllers
 
             var result = await context.SaveChangesAsync();
 
-            return Ok();
+            var productModel = await context.Products.Select(x => new ProductModel
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                SupplierId = x.SupplierId,
+                CategoryId = x.CategoryId,
+                QuantityPerUnit = x.QuantityPerUnit,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                UnitsOnOrder = x.UnitsOnOrder,
+                ReorderLevel = x.ReorderLevel,
+                Discontinued = x.Discontinued
+            }).FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
+
+            return Ok(productModel);
         }
 
         // PUT api/values/5
