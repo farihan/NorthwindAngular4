@@ -41,7 +41,7 @@
             <td>
                 <a [routerLink]="['/product-details/', record.productId]" class="btn btn-default btn-sm" role="button">Details</a>&nbsp;
                 <a [routerLink]="['/product-update/', record.productId]" class="btn btn-default btn-sm" role="button">Update</a>&nbsp;
-                <button class="btn btn-default btn-sm">Delete</button>
+                <a [routerLink]="['/product-delete/', record.productId]" class="btn btn-default btn-sm" role="button">Delete</a>
             </td>
         </tr>
     </tbody>

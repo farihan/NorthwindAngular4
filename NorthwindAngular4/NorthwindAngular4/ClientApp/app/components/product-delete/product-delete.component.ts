@@ -11,11 +11,11 @@ import { CategoryService } from './../../services/category.service';
 import { SupplierService } from './../../services/supplier.service';
 
 @Component({
-    selector: 'productupdate',
-    templateUrl: './product-update.component.html'
+    selector: 'productdelete',
+    templateUrl: './product-delete.component.html'
 })
 
-export class ProductUpdateComponent implements OnInit {
+export class ProductDeleteComponent implements OnInit {
     suppliers: any[];
     categories: any[];
     public productId: number;
@@ -52,7 +52,7 @@ export class ProductUpdateComponent implements OnInit {
         this.productService.getProduct(this.productId)
             .subscribe(result => {
                 this.product = result;
-                this.notificationService.info('Product update loaded');
+                this.notificationService.info('Product delete loaded');
             },
             error => {
                 this.notificationService.error(error);
@@ -61,9 +61,9 @@ export class ProductUpdateComponent implements OnInit {
 
     onSubmit(product: Product, isValid: boolean) {
         if (isValid) {
-            this.productService.update(this.product)
+            this.productService.delete(this.product)
                 .subscribe(result => {
-                    this.notificationService.success('Product updated');
+                    this.notificationService.success('Product deleted');
                     this.router.navigate(['/product-list']);
                 }, error => {
                     this.notificationService.error(error);

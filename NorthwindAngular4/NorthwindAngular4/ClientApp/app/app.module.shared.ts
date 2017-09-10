@@ -15,6 +15,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 
 import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';
@@ -32,7 +33,8 @@ import { SupplierService } from './services/supplier.service';
         ProductListComponent,
         ProductDetailsComponent,
         ProductCreateComponent,
-        ProductUpdateComponent
+        ProductUpdateComponent,
+        ProductDeleteComponent
     ],
     imports: [
         CommonModule,
@@ -48,6 +50,7 @@ import { SupplierService } from './services/supplier.service';
             { path: 'product-create', component: ProductCreateComponent },
             { path: 'product-details/:id', component: ProductDetailsComponent },
             { path: 'product-update/:id', component: ProductUpdateComponent },
+            { path: 'product-delete/:id', component: ProductDeleteComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

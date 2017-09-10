@@ -185,8 +185,18 @@ namespace NorthwindAngular4.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var product = await context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+
+            if (product == null)
+                return NotFound();
+
+            context.Products.Remove(product);
+
+            var result = await context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

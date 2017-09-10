@@ -30,6 +30,10 @@ export class ProductService {
             .map(res => res.json());
     }
 
+    delete(product: Product) {
+        return this.http.delete(this.endpoint + '/' + product.productId);
+    }
+
     toQueryString(obj: any) {
         var parts = [];
         for (var property in obj) {
