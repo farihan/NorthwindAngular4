@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { NotificationService } from './../../services/notification.service';
-import { Product } from './../../models/product';
-import { ProductService } from './../../services/product.service';
+import { NotificationService } from './../../../services/notification.service';
+import { Product } from './../../../models/product';
+import { ProductService } from './../../../services/product.service';
 
 @Component({
     selector: 'productlist',

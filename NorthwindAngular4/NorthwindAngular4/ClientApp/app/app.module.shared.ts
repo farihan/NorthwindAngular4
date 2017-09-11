@@ -11,11 +11,11 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { PaginationComponent } from './components/shared/pagination.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ProductCreateComponent } from './components/product-create/product-create.component';
-import { ProductUpdateComponent } from './components/product-update/product-update.component';
-import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
+import { ProductListComponent } from './components/product/product-list/product-list.component';
+import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
+import { ProductCreateComponent } from './components/product/product-create/product-create.component';
+import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
+import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 
 import { NotificationService } from './services/notification.service';
 import { ProductService } from './services/product.service';

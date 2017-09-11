@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/Observable/forkJoin';
 
-import { NotificationService } from './../../services/notification.service';
-import { ProductService } from './../../services/product.service';
-import { CategoryService } from './../../services/category.service';
-import { SupplierService } from './../../services/supplier.service';
+import { NotificationService } from './../../../services/notification.service';
+import { ProductService } from './../../../services/product.service';
+import { CategoryService } from './../../../services/category.service';
+import { SupplierService } from './../../../services/supplier.service';
 
 @Component({
     selector: 'productdetails',
