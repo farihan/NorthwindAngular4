@@ -24,7 +24,11 @@ namespace NorthwindAngular4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DatabaseConnection"]));
+            //sql server version
+            //SELECT @@VERSION AS 'SQL Server Version'; 
+            //use x => x.UseRowNumberForPaging() unless you are on mssql 2012 or higher 
+            services.AddDbContext<NorthwindContext>(options => options
+                .UseSqlServer(Configuration["ConnectionStrings:DatabaseConnection"], x => x.UseRowNumberForPaging()));
 
             services.AddMvc();
         }
@@ -37,7 +41,7 @@ namespace NorthwindAngular4
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = false
                 });
             }
             else
